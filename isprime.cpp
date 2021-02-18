@@ -1,10 +1,15 @@
 
 bool isprime(int n )
 {
-	if( n % 2 == 0 ) return true;
-	if( n % 3 == 0 ) return true;
-	for(int c = 3; c<=sqrt(n); c++)
-		if( n / c < c ) break;
+	if( n <= 1 ) return false;
+
+	if( n % 2 == 0 ) return ( n == 2);
+
+	for(int c = 3; c<=sqrt(n); c+=2)
+	{
+		if( n/c < c ) break;
 		if( n % c == 0 ) return false;
+	}
 	return true;
+
 }
