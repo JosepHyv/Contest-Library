@@ -1,28 +1,36 @@
+const int MAXN = 1e6+2;
+typedef long long int ll;
 ll st[4*MAXN];
 ll lz[4*MAXN];
 
-ll bld( int nn, int i, int f)
+ll combine( ll a, ll b )
 {
-	if( i == f)
-	{
-		cin>>st[nn];
-		return st[nn];
-	}
-	int mm = (i+f) /2;
-	return st[nn] = bld(2*nn, i, mm) + bld( 2*nn+1, mm+1, f);
+	/// return operations in nodes
+	return (a+b); // example
 }
 
-ll qr(int nn, int i, int f, int li, int ld)
+ll buid( int nd, int i, int f)
+{
+	if( i == f)
+	{ 
+		cin>>st[c]; 			
+		return st[nn];
+	}
+	int mm = (i+f)/2;
+	return st[nn] = combine(build(2*nd, i, mm) , build(2*nd+1,mm+1,f));
+}
+
+ll query(int nn, int i, int f, int li, int ld)
 {
 	if( i > ld || f < li )
 		return 0;
 	if( i >= li && f <= ld)
 		return st[nn];
 	int mm = ( i+f) / 2;
-	return qr(2*nn, i, mm, li, ld) + qr(2*nn+1, mm+1, f, li, ld);	
+	return combine(query(2*nn, i, mm, li, ld) + querr(2*nn+1, mm+1, f, li, ld));	
 }
 
-void pupd(int nn, int i, int f, int pos, int val)
+void update(int nn, int i, int f, int pos, int val)
 {
 	if( i == f)
 		st[nn] += val;
@@ -37,7 +45,8 @@ void pupd(int nn, int i, int f, int pos, int val)
 	}
 }
 
-void lzup(int nn, int i, int f, int li, int ld, int val)
+///lazy propagation
+void UpdateRange(int nn, int i, int f, int li, int ld, int val)
 {
 	if( lz[nn])
 	{
